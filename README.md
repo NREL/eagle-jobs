@@ -19,7 +19,7 @@ conda create --name hpc-rt --file requirements.txt
 ```
 conda activate hpc-rt
 ```
-### 4 - *Build the `stesml` package*
+### 4 - *Build the `hpc_runtime_prediction` package*
 From the repo root directory, run:
 ```
 python setup.py install

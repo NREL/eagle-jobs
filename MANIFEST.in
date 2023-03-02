@@ -1,0 +1,2 @@
+include versioneer.py
+include hpc_runtime_prediction/_version.py
