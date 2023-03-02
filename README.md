@@ -14,6 +14,8 @@ Below are the key details:
 
 * In the future, this repository will link to the full dataset of 11M+ anonymized jobs and host the full codebase developed for HPC runtime prediction and the associated data visualization.
 
+* More info about Eagle: [https://www.nrel.gov/hpc/eagle-system.html](https://www.nrel.gov/hpc/eagle-system.html)
+
 ## Getting Started
 ### 1 - *Clone this repository*
 ### 2 -  *Create the conda environment from the `requirements.txt` file*
