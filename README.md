@@ -53,7 +53,3 @@ conda deactivate
 # Credit
 
 Written by: Kevin Menear (kevin.menear@nrel.gov) and Dmitry Duplyakin (dmitry.duplyakin@nrel.gov) in collaboration with the National Renewable Energy Laboratories.
-
-# License
-
-Refer to the file called: LICENSE.
