@@ -52,4 +52,8 @@ conda deactivate
 
 # Credit
 
-Written by: Kevin Menear (kevin.menear@nrel.gov) and Dmitry Duplyakin (dmitry.duplyakin@nrel.gov) in collaboration with the National Renewable Energy Laboratories.
+Kevin and Dmitry, as employees of Alliance for Sustainable Energy, LLC, the manager and operator of the National Renewable Energy Laboratory.
+
+# License
+
+Refer to the file called: LICENSE.
