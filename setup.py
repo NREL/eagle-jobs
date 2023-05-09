@@ -14,15 +14,15 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 setup(
-    name='hpc_runtime_prediction',
+    name='eagle-jobs',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description='A package for runtime prediction of HPC jobs.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.nrel.gov/ESIF-Analysis/hpc_runtime_prediction',  # Optional
+    url='https://github.com/NREL/eagle-jobs',  # Optional
     author='Kevin Menear, Dmitry Duplyakin',
-    author_email='kevin.menear@nrel.ogv, dmitry.duplyakin@nrel.gov',  # Optional
+    author_email='kevin.menear@nrel.gov, dmitry.duplyakin@nrel.gov',  # Optional
     classifiers=[
         'Development Status :: 2 - Pre-Alpha Copy',
 
@@ -39,6 +39,6 @@ setup(
     packages=find_packages(),  # Required
     install_requires=[],  # TODO
     project_urls={
-        'Source': 'https://github.nrel.gov/ESIF-Analysis/hpc_runtime_prediction',
+        'Source': 'https://github.com/NREL/eagle-jobs',
     },
 )
