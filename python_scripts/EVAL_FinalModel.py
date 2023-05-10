@@ -10,8 +10,8 @@ import pandas as pd
 
 from xgboost import XGBRegressor
 
-from hpc_runtime_prediction.operation_support import train_test_split
-from hpc_runtime_prediction.data_preprocessing import label_encode_columns
+from eagle_jobs.operation_support import train_test_split
+from eagle_jobs.data_preprocessing import label_encode_columns
 
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
@@ -78,8 +78,8 @@ def evaluate_model(df, split_times):
 
 
 if __name__ == '__main__':
-    filepath = os.path.join('../data/', 'eagle_data.pkl')
-    eagle_df = pd.read_pickle(filepath)
+    filepath = os.path.join('../data/', 'eagle_data.parquet')
+    eagle_df = pd.read_parquet(filepath)
 
     categorical_features = ['user','partition']
     label_encode_columns(eagle_df, categorical_features)

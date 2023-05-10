@@ -9,7 +9,7 @@ import pandas as pd
 import datetime
 import os
 
-from hpc_runtime_prediction.model_optimization import optimize_training_window
+from eagle_jobs.model_optimization import optimize_training_window
 
 
 # Get split time and utput file name from arguments
@@ -24,8 +24,8 @@ output_file = args.output_file
 
 # # Import Eagle data
 
-filepath = os.path.join('../data/', 'eagle_data.pkl')
-eagle_df = pd.read_pickle(filepath)
+filepath = os.path.join('../data/', 'eagle_data.parquet')
+eagle_df = pd.read_parquet(filepath)
 
 # # Get split times for model method optimization
 
