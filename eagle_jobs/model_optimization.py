@@ -28,6 +28,18 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def optimize_training_window(df, split_times, model_type='XGBoost'):
+    """
+    This function optimizes the training window for a given model type by evaluating its performance on different training window sizes. The model types supported are XGBoost, Neural Networks (NN), and Term Frequency-Inverse Document Frequency (TFIDF). The function calculates the R2 score and Root Mean Squared Error (RMSE) for each combination of split time and training window size, and returns dictionaries containing these values.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for training and testing the model.
+    - split_times (list): A list of split times to be used for splitting the data into training and testing sets.
+    - model_type (str, optional): The type of model to be used for training and evaluation. Supported values are 'XGBoost', 'NN', and 'TFIDF'. Defaults to 'XGBoost'.
+
+    Returns:
+    - tuple: A tuple containing two dictionaries, the first with the R2 score for each combination of split time and training window size, and the second with the corresponding RMSE values.
+    """
+    
     r2_dict = dict()
     rmse_dict = dict()
     testing_window = 30
@@ -95,6 +107,18 @@ def optimize_training_window(df, split_times, model_type='XGBoost'):
 
 
 def optimize_testing_window(df, split_times, training_window):
+    """
+    This function optimizes the testing window for an XGBoost model by evaluating its performance on different testing window sizes. The function calculates the R2 score and Root Mean Squared Error (RMSE) for each combination of split time and testing window size, and returns dictionaries containing these values.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for training and testing the model.
+    - split_times (list): A list of split times to be used for splitting the data into training and testing sets.
+    - training_window (int): The size of the training window to be used for training the model.
+
+    Returns:
+    - tuple: A tuple containing two dictionaries, the first with the R2 score for each combination of split time and testing window size, and the second with the corresponding RMSE values.
+    """
+    
     r2_dict = dict()
     rmse_dict = dict()
     testing_windows = range(1,61)
@@ -135,6 +159,19 @@ def optimize_testing_window(df, split_times, training_window):
 
 
 def optimize_numerical_features(df, split_times, training_window, testing_window):
+    """
+    This function optimizes the numerical features used in an XGBoost model by evaluating its performance on different combinations of numerical features. The function calculates the R2 score and Root Mean Squared Error (RMSE) for each combination of split time and feature set, and returns dictionaries containing these values.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for training and testing the model.
+    - split_times (list): A list of split times to be used for splitting the data into training and testing sets.
+    - training_window (int): The size of the training window to be used for training the model.
+    - testing_window (int): The size of the testing window to be used for testing the model.
+
+    Returns:
+    - tuple: A tuple containing two dictionaries, the first with the R2 score for each combination of split time and feature set, and the second with the corresponding RMSE values.
+    """
+    
     features = ['nodes_req', 'processors_req', 'gpus_req', 'mem_req']
     feature_combinations = list(itertools.chain.from_iterable(
         itertools.combinations(features, r) for r in range(0, len(features) + 1)))
@@ -174,6 +211,21 @@ def optimize_numerical_features(df, split_times, training_window, testing_window
 
 
 def optimize_categorical_features(df, split_times, training_window, testing_window, numerical_features, encoding):
+    """
+    This function optimizes the categorical features used in an XGBoost model by evaluating its performance on different combinations of categorical features and encoding techniques. The function calculates the R2 score and Root Mean Squared Error (RMSE) for each combination of split time, feature set, and encoding type, and returns dictionaries containing these values.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for training and testing the model.
+    - split_times (list): A list of split times to be used for splitting the data into training and testing sets.
+    - training_window (int): The size of the training window to be used for training the model.
+    - testing_window (int): The size of the testing window to be used for testing the model.
+    - numerical_features (list): A list of numerical features to be included in the model.
+    - encoding (str): The encoding technique to be used for categorical features. Supported values are 'label', 'onehot', and 'target'.
+
+    Returns:
+    - tuple: A tuple containing two dictionaries, the first with the R2 score for each combination of split time, feature set, and encoding type, and the second with the corresponding RMSE values.
+    """
+    
     features = ['user','account','partition','qos','work_dir','name']
     
     if encoding == 'label':
@@ -235,12 +287,36 @@ def optimize_categorical_features(df, split_times, training_window, testing_wind
     return r2_dict, rmse_dict
 
 def average_runtime_algorithm(train_df, user_df, n):
+    """
+    This function calculates the average runtime of jobs for a given user based on the last 'n' jobs. If no user-specific jobs are available, the function returns the mean runtime of all jobs in the training dataset.
+
+    Parameters:
+    - train_df (pd.DataFrame): The input dataframe containing the data to be used for calculating the average runtime.
+    - user_df (pd.DataFrame or None): A dataframe containing user-specific data. If None or empty, the function uses the overall dataset for calculations.
+    - n (int): The number of last jobs to consider for calculating the average runtime.
+
+    Returns:
+    - float: The average runtime of the last 'n' jobs, either for a specific user or for the overall dataset. If the user-specific dataframe is empty or None, it returns a default value of 600.
+    """
+    
     if user_df is None or len(user_df) == 0:
-        return 600
+        return train_df.run_time.tail(n).mean()
     avg_runtime = user_df.run_time.tail(n).mean()
     return avg_runtime
 
 def optimize_recent_jobs(df, split_time, n_max):
+    """
+    This function optimizes the number of recent jobs considered for predicting the job runtime using the average runtime algorithm. The function calculates the R2 score and Root Mean Squared Error (RMSE) for each value of 'n' (number of recent jobs) up to 'n_max' and returns dictionaries containing these values.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for training and testing the average runtime algorithm.
+    - split_time (str): The timestamp used for splitting the data into training and testing sets.
+    - n_max (int): The maximum number of recent jobs to consider for optimizing the average runtime algorithm.
+
+    Returns:
+    - tuple: A tuple containing two dictionaries, the first with the R2 score for each value of 'n' (number of recent jobs) up to 'n_max', and the second with the corresponding RMSE values.
+    """
+    
     split_time = pd.Timestamp(split_time)
     r2_dict = dict()
     rmse_dict = dict()
@@ -271,6 +347,19 @@ def optimize_recent_jobs(df, split_time, n_max):
 
 
 def similar_jobs_algorithm(train_df, user_jobs, job_row, n):
+    """
+    This function calculates the average runtime of 'n' most similar jobs for a given job using the Euclidean distance as a similarity measure. If there are less than 'n' similar jobs available, the function considers all available jobs. If no user-specific jobs are available, the function returns the mean runtime of all jobs in the training dataset.
+
+    Parameters:
+    - train_df (pd.DataFrame): The input dataframe containing the data to be used for calculating the average runtime of similar jobs.
+    - user_jobs (tuple or None): A tuple containing two arrays, the first with feature values of the user-specific jobs, and the second with the corresponding job indices. If None, the function uses the overall dataset for calculations.
+    - job_row (np.array): A numpy array containing the feature values of the job for which the average runtime of similar jobs is to be calculated.
+    - n (int): The number of most similar jobs to consider for calculating the average runtime.
+
+    Returns:
+    - float: The average runtime of 'n' most similar jobs for the given job for a specific user. If no user-specific jobs are available, it returns the mean runtime of all jobs in the training dataset.
+    """
+    
     if user_jobs is None:
         return train_df.run_time.mean()
     if len(user_jobs[0]) < n + 2:
@@ -283,6 +372,19 @@ def similar_jobs_algorithm(train_df, user_jobs, job_row, n):
     return train_df.loc[ind[similar_job_indices]].run_time.mean()
 
 def optimize_similar_jobs(df, split_time, n_max):
+    """
+    This function optimizes the number of most similar jobs to consider for the similar_jobs_algorithm. It calculates the r2 score and RMSE for different values of 'n' up to 'n_max', considering a single testing window and a fixed training window.
+
+    Parameters:
+    - df (pd.DataFrame): The input dataframe containing the data to be used for optimizing the number of similar jobs.
+    - split_time (str or pd.Timestamp): The time at which the dataset is split into training and testing sets.
+    - n_max (int): The maximum number of similar jobs to consider for optimization.
+
+    Returns:
+    - r2_dict (dict): A dictionary with keys as the number of similar jobs and values as the corresponding r2 scores.
+    - rmse_dict (dict): A dictionary with keys as the number of similar jobs and values as the corresponding RMSE values.
+    """
+    
     df['submit_time_seconds'] = (df['submit_time'] - np.datetime64('1970-01-01T00:00:00')) // np.timedelta64(1, 's')
     df['wallclock_req_normalized'] = df['wallclock_req']
     df['submit_time_normalized'] = df['submit_time_seconds']

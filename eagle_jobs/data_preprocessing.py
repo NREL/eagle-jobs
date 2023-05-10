@@ -145,74 +145,43 @@ def one_hot_encode_columns(df, columns):
     for column in columns:
         one_hot = pd.get_dummies(df[column]).to_numpy()
         df[column + '_onehot'] = one_hot.tolist()
-        
-# Lookup Dictionary to convert Partition acronyms to full titles
-partition_lookup = {
-    'standard': 'standard', 
-    'bigmem-8600': 'big memory 8600', 
-    'bigmem': 'big memory', 
-    'dav': 'data analytics visualization', 
-    'ddn': 'ddn', 
-    'gpu': 'graphics processing unit', 
-    'short': 'short', 
-    'long': 'long', 
-    'bigscratch': 'big scratch', 
-    'debug': 'debug', 
-    'csc': 'computational science center', 
-    'mono': 'mono', 
-    'haswell': 'haswell', 
-    'standard,': 'standard', 
-    'weto': 'wind energy technologies office', 
-    'weto,standard': 'wind energy technologies office standard', 
-    'weto,short': 'wind energy technologies office short', 
-    'standard,weto': 'standard wind energy technologies office', 
-    'short,weto': 'short wind energy technologies office', 
-    'amo': 'advanced manufacturing office', 
-    'long,weto': 'long wind energy technologies office', 
-    'standard,amo': 'standard advanced manufacturing office', 
-    'short,amo': 'short advanced manufacturing office', 
-    'long,amo': 'long advanced manufacturing office', 
-    'gpul': 'graphics processing unit long', 
-    'csc-stdby': 'computational science center standby', 
-    'short-stdby': 'short standby', 
-    'gpul-stdby': 'graphics processing unit long standby', 
-    'standard-stdby': 'standard standby', 
-    'debug-stdby': 'debug standby', 
-    'gpu-stdby': 'graphics processing unit standby', 
-    'long-stdby': 'long standby', 
-    'bigscratch-stdby': 'big scratch standby', 
-    'bigmem-stdby': 'big memory standby', 
-    'weto-stdby,short-stdby': 'wind energy technologies office standby short standby', 
-    'short,debug': 'short debug', 
-    'long-stdby,weto-stdby': 'long standby wind energy technologies office standby', 
-    'amo-stdby': 'advanced manufacturing office standby', 
-    'amo-stdby,long-stdby': 'advanced manufacturing office standby long standby', 
-    'weto-stdby': 'wind energy technologies office standby', 
-    'amo,standard': 'advanced manufacturing office standard', 
-    'short,amo,standard': 'short advanced manufacturing office standard'
-}
-
-# Lookup Dictionary to convert QOS acronyms to full titles
-qos_lookup = {
-    'Unknown': 'unknown',
-    'normal': 'normal',
-    'high': 'high',
-    'debug': 'debug',
-    'penalty': 'penalty',
-    'standby': 'standby',
-    'buy-in': 'buy in',
-    'weto': 'wind energy technologies office',
-    'p_gpu_half': 'p graphics processing unit half'
-}
 
         
 def encode_other(column, instance, top_n):
+    """
+    A helper function for onehot_with_other. This function codes all instances not in the top n
+    instances as 'other'.
+    
+    Parameters:
+    - column (str): The name of the column being encoded
+    - instance (str): The name of the instance being checked
+    - top_n (List[str]): A list of the top n instances of the feature being encoded
+    
+    Returns:
+    - str: Either the instance name or the column name + '_other'
+    """
     if instance in top_n:
         return instance
     else:
         return column + '_other'
         
 def onehot_with_other(df, columns, n_values):
+    """
+    One-hot encode a categorical column in a DataFrame and save the encoding as a list in a new column.
+    This function differs from the one_hot_encode_columns function in that not all instances of a 
+    feature are given a separate feature. Rather, only the n most prevalent instance in each column are
+    given a feature, and the rest are gruped together as 'other'.
+    
+    Parameters:
+    - df (pandas.DataFrame): The DataFrame where the categorical columns will be encoded.
+    - columns (List[str]): A list of the columns to be encoded.
+    - n_values (List[int]): A list of the n values for each column (see description above)
+    
+    Returns:
+    - encoded_columns (dict): A dictionary with keys as the original column names and values as lists of
+    encoded column names generated after one-hot encoding.
+    """
+    
     encoded_columns = dict()
     for i, column in enumerate(columns):
         encoded_columns[column] = list()
