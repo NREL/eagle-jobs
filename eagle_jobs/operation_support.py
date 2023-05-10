@@ -124,11 +124,11 @@ def normalize_columns(df: pd.DataFrame, columns: List[str], method: str = "Stand
     Parameters:
     - df (pd.DataFrame): The pandas DataFrame.
     - columns (List[str]): List of columns to normalize.
-    - method (str): Method of normalization. Can be either "StandardScaler", "MinMaxScaler", or "RoobustScaler". 
+    - method (str): Method of normalization. Can be either "StandardScaler", "MinMaxScaler", or "RobustScaler". 
     Default is "StandardScaler".
     
     Returns:
-    - Tuple[pd.DataFrame, StandardScaler or MinMaxScaler]: Tuple of DataFrame with normalized columns and the scaler 
+    - Tuple[pd.DataFrame, StandardScaler, MinMaxScaler, or RobustScaler]: Tuple of DataFrame with normalized columns and the scaler 
     object used for normalization.
     """
     if method == "StandardScaler":
