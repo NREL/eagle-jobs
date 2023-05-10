@@ -50,41 +50,14 @@ def group_data_by_feature(df: pd.DataFrame, feature: str) -> dict:
     grouped_df = df.groupby(feature)
     return {key: grouped_df.get_group(key) for key in grouped_df.groups.keys()}
 
-def split_by_submit_time(df: pd.DataFrame, submit_time: int or float) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    '''
-    Split a pandas DataFrame by a submission time.
-    
-    This functioon takes a pandas DataFrame and an integer as input parameters.
-    It splits the DataFrame into two DataFrames, where one DataFrame has all rows
-    where the value in the 'submit_time' column is less than or equal to the integer
-    and one DataFrame where the value in the 'submit_time' column is greater than
-    the integer.
-    
-    Parameters:
-    - df (pandas.DataFrame): The DataFrame to be split.
-    - submit_time (int or float): The submission time used to split the DataFrame. It is a float
-    if it has been normalized.
-    
-    Returns:
-    - Tuple (pandas.DataFrame, pandas.DataFrame): A tuple of two DataFrames, where the first 
-    one contains the rows where the value in the 'submit_time' column is less than or equal to 
-    the input integer and the second one contains the rows where the value in the 'submit_time' 
-    column is greater than the input integer.
-    '''
-    df_less = df[df.submit_time.values <= submit_time]
-    df_greater = df[df.submit_time.values > submit_time]
-    return df_less, df_greater
-
-def select_time_window(df: pd.DataFrame, start_time: int or float, end_time: int or float) -> pd.DataFrame:
+def select_time_window(df: pd.DataFrame, start_time, end_time) -> pd.DataFrame:
     '''
     Select the rows in a pandas DataFrame where submit_time is between start_time and end_time.
     
     Parameters:
     - df (pandas.DataFrame): The DataFrame where the rows need to be selected.
-    - start_time (int or float): The start time used to filter the DataFrame (# of seconds since UNIX Epoch time,
-    may be normalized).
-    - end_time (int or float): The end time used to filter the DataFrame (# of seconds since UNIX Epoch time, 
-    may be normalized).
+    - start_time: The start time used to filter the DataFrame.
+    - end_time: The end time used to filter the DataFrame.
     
     Returns:
     - pandas.DataFrame: A DataFrame that contains only the rows where the value in the
@@ -94,25 +67,24 @@ def select_time_window(df: pd.DataFrame, start_time: int or float, end_time: int
     df_time_window = df[df['submit_time'].between(start_time, end_time)]
     return df_time_window
 
-def get_recent_jobs(df: pd.DataFrame, feature: str, feature_value: str, t: int or float, n: int) -> pd.DataFrame:
+def get_recent_jobs(df: pd.DataFrame, feature: str, feature_value: str, t, n: int) -> pd.DataFrame:
     """
     Get the n most recent jobs for a pandas DataFrame, filtered by a feature, submitted before time t.
     
     This function takes a pandas DataFrame, a feature, a feature value, a time t, and a 
-    number of jobs n as input and returns the most recent n jobs from that feature, with the  
-    feature value, submitted before time t. For this function to work correctly, the DataFrame
+    number of jobs n as input and returns the most recent n jobs with the feature value 
+    submitted before time t. For this function to work correctly, the DataFrame
     must be sorted by submit time.
     
     Parameters:
     - df (pandas.DataFrame): The DataFrame containing the jobs.
     - feature (str): The feature (user/account/group) we are filtering with.
     - feature_value (str): The user/account/group whose recent jobs need to be selected.
-    - t (int or float): The time (# of seconds since UNIX epoch time) before which the jobs were submitted. It
-    is a flat if it has been normalized.
-    - n (int): The number f recent jobs that need to be selected.
+    - t: The time before which the jobs were submitted.
+    - n (int): The number of recent jobs that need to be selected.
     
     Returns:
-    - pandas.DataFrame: A DataFrame that contains the most recent n jobs from the user,
+    - pandas.DataFrame: A DataFrame that contains the most recent n jobs with the feature value,
     submitted before time t.
     """
     return df[(df[feature].values == feature_value) & (df.end_time.values < t)].tail(n)
