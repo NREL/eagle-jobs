@@ -17,11 +17,11 @@ from category_encoders.glmm import GLMMEncoder
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 
-from hpc_runtime_prediction.operation_support import train_test_split
-from hpc_runtime_prediction.operation_support import normalize_columns
+from eagle_jobs.operation_support import train_test_split
+from eagle_jobs.operation_support import normalize_columns
 
-from hpc_runtime_prediction.data_preprocessing import label_encode_columns
-from hpc_runtime_prediction.data_preprocessing import onehot_with_other
+from eagle_jobs.data_preprocessing import label_encode_columns
+from eagle_jobs.data_preprocessing import onehot_with_other
 
 
 import warnings

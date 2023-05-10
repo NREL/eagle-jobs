@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 setup(
-    name='eagle-jobs',
+    name='eagle_jobs',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description='A package for runtime prediction of HPC jobs.',
