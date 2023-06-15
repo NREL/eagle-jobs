@@ -4,9 +4,9 @@ This repository is the home of a sample dataset of jobs run on the Eagle HPC sys
 
 Below are the key details of this repository:
 
-* `The sample dataset is the first 1000 jobs submitted to Eagle on or after January 1, 2019`. 
+* The sample dataset is the first 1000 jobs submitted to Eagle on or after January 1, 2019. 
 
-* `All potentially sensitive information (such as user names, project titles, and account information) has been anonymized to generic labels (e.g. user003, account098, etc.).`
+* All potentially sensitive information (such as user names, project titles, and account information) has been anonymized to generic labels (e.g. user003, account098, etc.).
 
 * The data is saved in the `data` directory in csv, json, and pkl formats.
 
