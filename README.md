@@ -10,7 +10,7 @@ Below are the key details of this repository:
 
 * The data is saved in the `data` directory in csv, json, and pkl formats.
 
-* The codebase consists of the `hpc_runtime_prediction` package as well as a Jupyter notebooks for data visualization, building, training, testing, and optimizing a runtime prediction model.
+* The codebase consists of the `hpc_runtime_prediction` package as well as Jupyter notebooks and Python scripts for data visualization, building, training, testing, and optimizing a runtime prediction model.
 
 * More info about Eagle: [https://www.nrel.gov/hpc/eagle-system.html](https://www.nrel.gov/hpc/eagle-system.html)
 
@@ -38,10 +38,15 @@ This will open Jupyter Lab in your default browser.
 ### 6 - *Using Jupyter Lab*
 - A detailed Jupyter Lab tutorial can be found [here](https://jupyterlab.readthedocs.io/en/stable/).
 - Open the `notebooks` folder
-- The data_visualization notebook contains some data visualization tools.
-- The ALG_TFIDF notebook can be used to develop, train, and test a TFIDF model.
-    - *Note:* This is not set up for the sample data set, and will not work very well with the sample data set due to its limited size.
-- The analyze_results notebook can be used to analyze the results of various optimization tasks.
+- The notebooks in this directory are:
+  - `Eagle_Data_Visualization`: Use this notebook to analyze the Eagle dataset.
+  - `Runtime_Variation`: Use this notebook to analyse the variation in HPC job runtime.
+  - `Combine_Results`: Use this notebook to combine results generated with the Python scripts (see details on these scripts below).
+  - `Model_Optimization`: Use this notebook to optimize a runtime prediction model's feature set, training, and testing window.
+  - `Hyperparameter_Optimization`: Use this notebook to optimize the model hyperparameters with [Optuna](https://optuna.readthedocs.io/en/stable/).
+  - `HPO_Visualization`: Use this notebook to visualize the results of Hyperparameter Optimization.
+  - `Final_Model_Analysis`: Use this notebook to analyze the results of a runtime prediction model.
+- *Note:* None of these notebooks are set up for the sample data set, and they will not work well with the sample data set due to its limited size.
   
 ### 7 - *Deactivate the conda environment*
 To deactivate the environment, run:
