@@ -1,6 +1,6 @@
 # Eagle Jobs
 #### *An HPC dataset of 11M+ jobs and a Codebase for HPC Runtime Prediction Models*
-This repository is the home of a sample dataset of jobs run on the Eagle HPC system at the National Renewable Energy Laboratory in Golden, Colorado, USA, as well as a limited alpha version of the codebase used to analyze Eagle data and develop HPC runtime prediction models. The full 11M+ job dataset can be downloaded from the Open Energy Data Initiative website at [https://data.openei.org/submissions/5860](https://data.openei.org/submissions/5860). The data is available in parquet (253.1 MB) and compressed CSV (115.6 MB) formats. To use this dataset with the Jupyter notebooks in this repository, clone this repo and put the parquet file in the `data` directory.
+This repository is the home of a sample dataset of jobs run on the Eagle HPC system at the National Renewable Energy Laboratory in Golden, Colorado, USA, as well as a limited alpha version of the codebase used to analyze Eagle data and develop HPC runtime prediction models. The full 11M+ job dataset can be downloaded from the Open Energy Data Initiative (OEDI) website at [https://data.openei.org/submissions/5860](https://data.openei.org/submissions/5860). The data is available in parquet (253.1 MB) and compressed CSV (115.6 MB) formats. To use this dataset with the Jupyter notebooks in this repository, clone this repo and put the parquet file in the `data` directory.
 
 Below are the key details of this repository:
 
