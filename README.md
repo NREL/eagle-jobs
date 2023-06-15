@@ -48,7 +48,10 @@ This will open Jupyter Lab in your default browser.
   - `Final_Model_Analysis`: Use this notebook to analyze the results of a runtime prediction model.
 - *Note:* None of these notebooks are set up for the sample data set, and they will not work well with the sample data set due to its limited size.
   
-### 7 - *Deactivate the conda environment*
+### 7 - *Parallelizing the Workload with Pytho Scripts*
+The Python scripts in the python_scripts directory are created to allow the model optimization process to be parallelized. This is necessary for large datasets, such as the Eagle dataset, because the iterative optimization process used in this codebase can result in the training aand testing of tens of thousands of models. This process can be parallelized by training and testing models in batches based on a specified split time (see the [Wiki documentation](https://github.com/NREL/eagle-jobs/wiki/Model-Optimization) for more details on this process).
+
+### 8 - *Deactivate the conda environment*
 To deactivate the environment, run:
 ```
 conda deactivate
