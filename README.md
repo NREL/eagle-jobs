@@ -1,18 +1,16 @@
 # Eagle Jobs
 #### *An HPC dataset of 11M+ jobs and a Codebase for HPC Runtime Prediction Models*
-This repository is currently the home of a sample dataset of jobs run on the Eagle HPC system at the National Renewable Energy Laboratory in Golden, Colorado, USA, as well as a limited alpha version of the codebase used to analyze Eagle data and develop HPC runtime prediction models.
+This repository is the home of a sample dataset of jobs run on the Eagle HPC system at the National Renewable Energy Laboratory in Golden, Colorado, USA, as well as a limited alpha version of the codebase used to analyze Eagle data and develop HPC runtime prediction models. The full 11M+ job dataset can be downloaded at [https://data.openei.org/submissions/5860](https://data.openei.org/submissions/5860). The data is available in parquet (253.1 MB) and compressed CSV (115.6 MB) formats. To use this dataset with the Jupyter notebooks in this repository, clone this repo and put the parquet file in the `data` directory.
 
-Below are the key details:
+Below are the key details of this repository:
 
-* `The current sample dataset is the first 1000 jobs submitted to Eagle on or after January 1, 2019`. 
+* `The sample dataset is the first 1000 jobs submitted to Eagle on or after January 1, 2019`. 
 
 * `All potentially sensitive information (such as user names, project titles, and account information) has been anonymized to generic labels (e.g. user003, account098, etc.).`
 
-* The data is saved in the `sample_data` directory in csv, json, and pkl formats.
+* The data is saved in the `data` directory in csv, json, and pkl formats.
 
-* The codebase consists of the `hpc_runtime_prediction` package as well as a Jupyter notebook for data visualization and another notebook for building, training, and testing a TFIDF runtime prediction model.
-
-* In the future, this repository will link to the full dataset of 11M+ anonymized jobs and host the full codebase developed for HPC runtime prediction and the associated data visualization.
+* The codebase consists of the `hpc_runtime_prediction` package as well as a Jupyter notebooks for data visualization, building, training, testing, and optimizing a runtime prediction model.
 
 * More info about Eagle: [https://www.nrel.gov/hpc/eagle-system.html](https://www.nrel.gov/hpc/eagle-system.html)
 
@@ -44,6 +42,7 @@ This will open Jupyter Lab in your default browser.
 - The ALG_TFIDF notebook can be used to develop, train, and test a TFIDF model.
     - *Note:* This is not set up for the sample data set, and will not work very well with the sample data set due to its limited size.
 - The analyze_results notebook can be used to analyze the results of various optimization tasks.
+  
 ### 7 - *Deactivate the conda environment*
 To deactivate the environment, run:
 ```
