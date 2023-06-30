@@ -5,7 +5,7 @@ This repository is the home of a sample dataset of jobs run on the Eagle HPC sys
 A preprint of the paper detailing this research can be found here: [Mastering HPC Runtime Prediction: From Observing Patterns to a Methodological Approach](https://www.nrel.gov/docs/fy23osti/86526.pdf) (*published in the proceedings of [PEARC23](https://pearc.acm.org/pearc23/)*). Following this initial work, a secondary effort was undertaken to determine if incorporating (as an input feature) the primary application used by the HPC job improves the performance of runtime prediction models. A preprint of the results of this work can be found here: [Is Knowledge about Running Applications Helping Improve Runtime Prediction of HPC Jobs?](https://www.nrel.gov/docs/fy23osti/86578.pdf) (*published in the proceedings of [PEARC23](https://pearc.acm.org/pearc23/)*)
 
 
-The full 11M+ job dataset can be downloaded from the Open Energy Data Initiative (OEDI) website at [https://data.openei.org/submissions/5860](https://data.openei.org/submissions/5860). The data is available in parquet (253.1 MB) and compressed CSV (115.6 MB) formats. To use this dataset with the Jupyter notebooks in this repository, clone this repo and put the parquet file in the `data` directory.
+**The full 11M+ job dataset can be downloaded from the Open Energy Data Initiative (OEDI) website at** [https://data.openei.org/submissions/5860](https://data.openei.org/submissions/5860). The data is available in parquet (253.1 MB) and compressed CSV (115.6 MB) formats. To use this dataset with the Jupyter notebooks in this repository, clone this repo and put the parquet file in the `data` directory.
 
 Below are the key details of this repository:
 
