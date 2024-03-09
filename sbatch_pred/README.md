@@ -22,7 +22,12 @@ Our analysis shows that:
 
 # Detailed Results
 Per-Partition Results for Regression Models:
-<img width="935" alt="image" src="https://media.github.nrel.gov/user/2146/files/a165045a-61a0-41de-a7e1-8eb071173686">
+<img width="916" alt="image" src="https://github.com/NREL/eagle-jobs/assets/77375297/bfc93e36-7b44-4b4a-bca1-5fe8726e90b2">
 
 Per-Partition Results for Classification Models:
-<img width="928" alt="image" src="https://media.github.nrel.gov/user/2146/files/9533e915-dddb-467a-8e64-e79e10f22eaf">
+<img width="914" alt="image" src="https://github.com/NREL/eagle-jobs/assets/77375297/57af98e9-3ad2-4509-88e7-45d63cd4d9eb">
+
+Confusion Matrices for System-State Feature Set Variations
+![image](https://github.com/NREL/eagle-jobs/assets/77375297/82b860b6-331d-4dde-8527-07d7b3027623)
+
+
